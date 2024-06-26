@@ -44,8 +44,6 @@ class ThreadExampleRunnable implements Runnable {
     }
 }
 
-
-
 public class ThreadTest01 {
     public static void main(String[] args) {
         // pegando o nome da thread que esta sendo usada

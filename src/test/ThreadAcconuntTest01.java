@@ -21,8 +21,10 @@ public class ThreadAcconuntTest01 implements Runnable{
             }
         }
     }
-
-    private void withdrawal(int amount) {
+    //usar o synchronized em um metodo faz com que apenas uma thread possa usar ele por vez
+    private synchronized void withdrawal(int amount) {
+        //tmb tem como sincronizar so um bloco de codigo ex
+        // synchronized (account) {}, isso faz com que so uma thread por vez pode acessar oq tem dentro dele
         if (account.getBalance() >= amount) {
             System.out.println(getThreadName() + " esta indo sacar dinheiro ");
             account.withdrawal(amount);

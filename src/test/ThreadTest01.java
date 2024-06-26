@@ -39,6 +39,13 @@ class ThreadExampleRunnable implements Runnable {
             System.out.print(c);
             if (i % 100 == 0) {
                 System.out.println();
+
+            }
+            //fazer a thread dormir
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -62,15 +69,21 @@ public class ThreadTest01 {
         // t4.run();
 
         // a melhor maneira é instanciar um objeto Thread e usar Runnable dentro do construtor
-        Thread t1 = new Thread(new ThreadExampleRunnable('A'));
-        Thread t2 = new Thread(new ThreadExampleRunnable('B'));
-        Thread t3 = new Thread(new ThreadExampleRunnable('C'));
-        Thread t4 = new Thread(new ThreadExampleRunnable('D'));
+        Thread t1 = new Thread(new ThreadExampleRunnable('A'), "Thread 1"); //o construtor é sobrecarregado entao da pra ter ou nao nome na thread !!
+        Thread t2 = new Thread(new ThreadExampleRunnable('B'), "Thread 2");
+        Thread t3 = new Thread(new ThreadExampleRunnable('C'), "Thread 3");
+        Thread t4 = new Thread(new ThreadExampleRunnable('D'), "Thread 4");
+
+        //prioridades, 1 - 10 ou MIN - MAX
+        //a prioridade nem sempre funciona do jeito esperado entao nao é bom fazer algo que dependa dela
+        t4.setPriority(Thread.MAX_PRIORITY);
 
         // com o metodo start ele inicia uma nova thread para cada um
         t1.start();
         t2.start();
         t3.start();
         t4.start();
+
+        //nao pode startar a msm thread mais de uma vez
     }
 }
